@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">BlankCard</string>
+    <string name="service_description">My HCE Service</string>
+    <string name="aid_group_description">My AID Group</string>
+</resources>
