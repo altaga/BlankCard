@@ -4,15 +4,15 @@ Blank Card leverages ZK rollups to safeguard credit and debit cards from cloning
 
 # Intro:
 
-En un mundo donde las transacciones digitales son cada vez más comunes, la seguridad de las tarjetas de crédito y débito enfrenta constantes desafíos como el fraude y la clonación. Además, la integración de las finanzas tradicionales con el ecosistema cripto sigue siendo un proceso complejo y lleno de barreras, lo que dificulta su adopción generalizada. 
+In a world where digital transactions are becoming more common, credit and debit card security faces constant challenges such as fraud and cloning. In addition, the integration of traditional finance with the crypto ecosystem remains a complex and barrier-ridden process, hindering widespread adoption.
 
 # Problem:
 
-El problema con esto es la exposición de datos sensibles en tarjetas tradicionales mediante su NFC, que las hace vulnerables a clonación y fraude.
+The problem with this is the exposure of sensitive data on traditional cards through their NFC, which makes them vulnerable to cloning and fraud.
 
 # Solution:
 
-**Blank Card** protege los pagos con tarjeta de la clonación y el fraude al usar **ZK rollups**, evitando que datos sensibles como el número de la tarjeta o el CVV sean expuestos durante las transacciones crypto y eventualmente tradicionales.  
+**Blank Card** protects card payments from cloning and fraud by using **ZK rollups**, preventing sensitive data such as card number or CVV from being exposed during crypto and eventually traditional transactions.
 
 # Diagrams:
 
@@ -20,19 +20,19 @@ El problema con esto es la exposición de datos sensibles en tarjetas tradiciona
 
 # Noir and ZK Circuits:
 
-Para realizar los circuitos de ZK se utilizo Noir Lang, se desarrollo un circuito el cual cuenta con 3 caracteristicas importantes de chequeo.
+To make the ZK circuits, Noir Lang was used, a circuit was developed which has 3 important checking characteristics.
 
-- El numero y exp number de la trajeta corresponde al numero cuando se creo.
-- El numero de expriacion no vencido, osea es una trajeta valida aun.
-- Revision de el numero de la trajeta mediante el algoritmo de Luhn, este revisa que el numero de la tarjeta pase una prueba matematica.
+- The number and exp number of the card correspond to the number when it was created.
+- The expiration number has not expired, meaning it is still a valid card.
+- Revision of the card number using the Luhn algorithm, which verifies that the card number passes a mathematical test.
 
-Todo el circuito asi como sus implementaciones de revision ZK estan en el siguiente enlace.
+The entire circuit as well as its ZK revision implementations are in the following link.
 
 [CODE](./Circuit/main.nr)
 
 # Base:
 
-Utilizamos Base como nuestra chain principal, debido a sus costos bajos de transacciones y su capacidad de ejecutar sin problema los ZK Verifiers de la libreria Noir.
+We use Base as our main chain, due to its low transaction costs and ability to seamlessly run ZK Verifiers from the Noir library.
 
     export const blockchains = [
     {
@@ -65,12 +65,12 @@ Utilizamos Base como nuestra chain principal, debido a sus costos bajos de trans
     },
     ];
 
-Todos los datos utilizados para interactuar con Base estan en el siguiente codigo.
+All the data used to interact with Base is in the following code.
 [CODE](./BlankCard/src/utils/constants.js)
 
 # Blockscout:
 
-Todos los datos provenientes de la chain como lo son lectura de balances y transacciones en nuestra aplicacion se realizaron con Blockscount.
+All data coming from the chain, such as reading balances and transactions in our application, were done with Blockscount.
 
     async getBalancesBlockScout() {
     const publicKey = this.context.value.publicKey;
@@ -102,13 +102,13 @@ Todos los datos provenientes de la chain como lo son lectura de balances y trans
         });
     }
 
-Todas las implementaciones tecnicas de este codigo estan en el codigo de nuestra app.
+All technical implementations of this code are in our app code.
 
 [CODE](./BlankCard/src/screens/main/tabs/tab1.js)
 
 # Pyth:
 
-Cuando se realiza un pago es muy importante que los datos de precios sean presisos, asi que en los momentos de pago, previo a ellos se realiza un update y un fetch a los price feeds de Pyth con Hermes.
+When making a payment, it is very important that the price data is accurate, so at the time of payment, an update and a fetch to the Pyth price feeds with Hermes is performed prior to the payment.
 
     async function getPythPrices() {
     const requestOptions = {
@@ -133,13 +133,13 @@ Cuando se realiza un pago es muy importante que los datos de precios sean presis
     });
     }
 
-La implementacion de estos Price Feeds al momento del pago estan implementados en el siguiente enlace.
+The implementation of these Price Feeds at the time of payment is implemented in the following link.
 
 [CODE](./BlankCard/src/screens/main/tabs/tab3.js)
 
 # Layer Zero:
 
-Para poder realizar un medio de pago eficiente, basarnos solo en una chain seria una mala estrategia, asi que utilizamos la plataforma de Stargate para realizar crosschain on payment, lo cual indica que al momento de realizar el pago podremos decidir la chain objetivo de nuestros tokens.
+In order to create an efficient payment method, relying only on one chain would be a bad strategy, so we use the Stargate platform to perform crosschain on payment, which means that at the time of making the payment we can decide the target chain for our tokens.
 
     // Crosschain Transfer
 
@@ -159,7 +159,7 @@ Para poder realizar un medio de pago eficiente, basarnos solo en una chain seria
         );
         stargatePoolUSDC.send{value: msg.value}(_sendParam, _fee, address(this));
     }
-
-Por ahora la implementacion esa realizada para funcionar con USDC al momento del pago, pero todo el contrato podran encontrarlo en el siguiente enlace.
+    
+For now the implementation is done to work with USDC at the time of payment, but the entire contract can be found at the following link.
 
 [CODE](./Contracts/BlankAccount.sol)
