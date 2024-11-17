@@ -14,7 +14,7 @@ import Tab1 from './tabs/tab1';
 // Tabs
 
 const BaseStateMain = {
-  tab: 2, // 0
+  tab: 0, // 0
   mainHeight: main,
 };
 
@@ -37,15 +37,9 @@ class Main extends Component {
       <SafeAreaView style={[GlobalStyles.container]}>
         <Header />
         <SafeAreaView style={[GlobalStyles.main]}>
-          {
-            this.state.tab === 0 && <Tab1 navigation={this.props.navigation} />
-          }
-          {
-            this.state.tab === 1 && <Tab2 navigation={this.props.navigation} />
-          }
-          {
-            this.state.tab === 2 && <Tab3 navigation={this.props.navigation} />
-          }
+          {this.state.tab === 0 && <Tab1 navigation={this.props.navigation} />}
+          {this.state.tab === 1 && <Tab2 navigation={this.props.navigation} />}
+          {this.state.tab === 2 && <Tab3 navigation={this.props.navigation} />}
         </SafeAreaView>
         <View style={[GlobalStyles.footerMain]}>
           <Pressable

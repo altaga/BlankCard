@@ -91,10 +91,10 @@ const BaseStatePaymentWallet = {
   publicKeyCard: basePublicKey,
   balances: blockchains[0].tokens.map(() => 0),
   activeTokens: blockchains[0].tokens.map(() => false),
-  stage: 1, // 0
-  amount: '0.5', // "0.00"
+  stage: 0, // 0
+  amount: '0.00', // "0.00"
   cardProof: null,
-  loading: true,
+  loading: false,
   status: 'Processing...',
   explorerURL: '',
   transactionDisplay: {
@@ -103,7 +103,7 @@ const BaseStatePaymentWallet = {
     tokenAddress: blockchains[0].tokens[0].address,
     icon: blockchains[0].tokens[0].icon,
   },
-  chainSelected: crosschains[3],
+  chainSelected: crosschains[0],
   // QR print
   saveData: '',
 };
@@ -169,7 +169,7 @@ class Tab3 extends Component {
   }
 
   async updatePriceFeeds() {
-    /**
+    
       const privateKey = this.context.value.privateKey;
       const wallet = new ethers.Wallet(privateKey, this.provider[0]);
       const contract = new ethers.Contract(blockchains[0].pyth, abiPyth, wallet);
@@ -186,11 +186,11 @@ class Tab3 extends Component {
       const tx = await wallet.sendTransaction(updateTransaction);
       await tx.wait();
       console.log(tx);
-    */
+    
   }
 
   async getBalances() {
-    await this.updatePriceFeeds();
+    //await this.updatePriceFeeds();
     const publicKey = this.context.value.publicKeyCard;
     const nativeBalance = await this.provider[0].getBalance(publicKey);
     const tokenBalances = await this.getBalancesBlockScout();

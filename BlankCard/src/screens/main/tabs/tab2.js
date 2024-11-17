@@ -258,7 +258,7 @@ export default class Tab2 extends Component {
           }}>
           {blockchains[0].tokens.map((token, i) => (
             <Pressable
-              onPress={() => this.props.navigation.navigate('DepositWallet')}
+              onPress={() => this.props.navigation.navigate('DepositWalletCard')}
               key={i}
               style={GlobalStyles.network}>
               <View

@@ -8,6 +8,7 @@ import SplashLoading from './screens/splashLoading/splashLoading';
 import AppStateListener from './utils/appStateListener';
 import { ContextProvider } from './utils/contextModule';
 import DepositWallet from './screens/depositWallet/depositWallet';
+import DepositWalletCard from './screens/depositWalletCard/depositWallet';
 
 const Stack = createNativeStackNavigator();
 
@@ -40,6 +41,7 @@ export default function App() {
             // Wallet Screens
           }
           <Stack.Screen name="DepositWallet" component={DepositWallet} />
+          <Stack.Screen name="DepositWalletCard" component={DepositWalletCard} />
         </Stack.Navigator>
       </NavigationContainer>
     </ContextProvider>
