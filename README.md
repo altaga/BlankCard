@@ -1,4 +1,4 @@
-# Chain-Estate
+# Blank Card
 
 Blank Card leverages ZK rollups to safeguard credit and debit cards from cloning while streamlining their integration into the crypto ecosystem.
 
